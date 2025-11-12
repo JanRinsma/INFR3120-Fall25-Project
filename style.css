@@ -11,8 +11,14 @@ body {
     background-color: antiquewhite;
 }
 
+button {
+    height: 50px;
+    border-radius: 25px;
+}
+
 #intro, #content {
     padding-left: 30%;
     padding-right: 30%;
     text-align: center;
 }
+
