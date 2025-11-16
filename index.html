@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This is just the main settings-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width" initial-scale="1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Scheduling System</title>
+    </head>
+
+    <body>
+        <!-- This is the intro, logo and the text to be displayed.-->
+        <section id="intro">
+            <img src="scheduling-logo.png">
+            <h1>STUDENT SCHEDULING SYSTEM</h1>
+            <p>
+                This site contains the initial version of our scheduling system project. Many things may not be as good
+                or look as good as they would in the final version, but the basic functionality should be present. Further
+                improvements upon functionality, appearance, and various "under the hood" things(such as making code more
+                efficient or clean without altering the appearance/functionality of the site) will follow in future releases
+                of this site.
+            </p>
+        </section>
+
+        <!-- This is for the button -->
+        <section id="content">
+            <button type="button" name="entry-form">Click here to create schedule</button>
+        </section>
+        
+            <!-- This is for the form. -->
+            <table>
+                <tr>
+                    <td>
+                        <div id="entry-form"> 
+                            <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
+                                <div>
+                                    <label>Event Name*</label><label class="validation-error hide" id="eventValidationError">This field is required.</label>
+                                    <input type="text" name="event" id="event">
+                                </div>
+                                <div>
+                                    <label>Date</label>
+                                    <input type="text" name="date" id="date">
+                                </div>
+                                <div>
+                                    <label>Time</label>
+                                    <input type="text" name="time" id="time">
+                                </div>
+                                <div  class="form-action-buttons">
+                                    <input type="submit" value="Submit">
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+
+                    <!-- This is for the Table. -->
+                    <td>
+                        <table class="list" id="eventList">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>  
+        <!-- This is to make sure we run our javascript :) -->
+        <script src="script.js"></script>
+    </body>
+
+</html>
