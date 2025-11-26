@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Scheduling System</title>
+</head>
+
+
+<body>
+
+    <!--This creates the lnk to send them to index.html (home)-->
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+
+    <!--This creates the lnk to send them to index.html (home)-->
+    <section class="intro">
+        <h1>Login and Registration Page</h1>
+        <p>Welcome! You can login if you have an account, or register below to create one.</p>
+    </section>
+
+    <!--This creates Login section and sets the inputs (I made it so both username and password are required.) -->
+    <h2>Login</h2>
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <label for="password">Password:</label><br>
+        <input type="password" name="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <!--This is the register form, it sets the inputs (I also made this one have both username and password required.)-->
+    <h2>Register</h2>
+    <form id="register-form">
+        <label for="new-username">Username:</label>
+        <input type="text" name="new-username" required>
+        <label for="new-password">Password:</label><br>
+        <input type="password" name="new-password" required><br><br>
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        //This sends them to index.html (Home) if they're logged in.
+        if(localStorage.getItem("loggedIn")){
+            window.location.href = "index.html";
+        }
+
+        // This is what grabs the password and username. Trim also removes the spaces before / after.
+        const loginForm = document.getElementById("login-form");
+        loginForm.addEventListener("submit", function(e)
+        {
+            e.preventDefault();
+            const username = loginForm.username.value.trim();
+            const password = loginForm.password.value;
+
+            // This is what checks whether their account exists and the credentials are correct.
+            const storedUser = JSON.parse(localStorage.getItem("user"));
+            if(storedUser && storedUser.username === username && storedUser.password === password){
+                localStorage.setItem("loggedIn", "true");
+                window.location.href = "index.html";
+            } else {
+                alert("Incorrect username or password");
+            }
+        });
+
+        // Registration form setting the values.
+        const registerForm = document.getElementById("register-form");
+        registerForm.addEventListener("submit", function(e){
+            e.preventDefault();
+            const newUsername = registerForm["new-username"].value.trim();
+            const newPassword = registerForm["new-password"].value;
+
+            // This sets their registration details and has it become an official "login"
+            if(newUsername && newPassword){
+                localStorage.setItem("user", JSON.stringify({username: newUsername, password: newPassword}));
+                alert("Registration successful! You can now login.");
+                registerForm.reset();
+            } else {
+                alert("Please enter a username and password");
+            }
+        });
+    </script>
+</body>
+</html>
