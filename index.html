@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Scheduling System</title>
 </head>
@@ -39,61 +39,3 @@
             <td>
                 <div id="entry-form"> 
                     <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
-                        <div>
-                            <label>Event Name*</label><label class="validation-error hide" id="eventValidationError">This field is required.</label>
-                            <input type="text" name="event" id="event">
-                        </div>
-                        <div>
-                            <label>Date</label>
-                            <input type="text" name="date" id="date">
-                        </div>
-                        <div>
-                            <label>Time</label>
-                            <input type="text" name="time" id="time">
-                        </div>
-                        <div  class="form-action-buttons">
-                            <input type="submit" value="Submit">
-                        </div>
-                    </form>
-                </div>
-            </td>
-            <td>
-                <table class="list" id="eventList">
-                    <thead>
-                        <tr>
-                            <th>Event Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
-
-    <!--This is very importnat it runs our script file.-->
-    <script src="script.js"></script>
-    <script>
-        
-        //This redirects them to the login page if they're not logged in.
-        if (!localStorage.getItem("loggedIn")) {
-            window.location.href = "login.html";
-        }
-
-        //This section switches between displaying the login and logout in the header.
-        const loginNav = document.getElementById("loginNav");
-        const logoutNav = document.getElementById("logoutNav");
-        loginNav.style.display = "none";
-        logoutNav.style.display = "inline";
-
-        //When "Logout" is clicked, this sends them back to the login page.
-        logoutNav.addEventListener("click", () => {
-            localStorage.removeItem("loggedIn");
-            window.location.href = "login.html";
-        });
-    </script>
-</body>
-</html>
