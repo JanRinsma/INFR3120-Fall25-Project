@@ -8,7 +8,6 @@
     <title>Scheduling System</title>
 </head>
 
-
 <body>
 
     <!--This creates the lnk to send them to index.html (home)-->
@@ -42,6 +41,19 @@
         <input type="submit" value="Register">
     </form>
 
+    <!--Button to show/hide the Reset Password form-->
+    <h2 class="form-header">Forgot your password?</h2>
+    <button id="toggle-reset">Click here to reset password</button>
+
+    <!--This is the new password reset/change form-->
+    <form id="reset-form" style="display:none;">
+        <label for="reset-username">Username:</label>
+        <input type="text" name="reset-username" required>
+        <label for="reset-password">New Password:</label><br>
+        <input type="password" name="reset-password" required><br><br>
+        <input type="submit" value="Reset Password">
+    </form>
+
     <script>
         //This sends them to index.html (Home) if they're logged in.
         if(localStorage.getItem("loggedIn")){
@@ -66,7 +78,7 @@
             }
         });
 
-        // Registration form setting the values.
+        // This is the registration form setting the values.
         const registerForm = document.getElementById("register-form");
         registerForm.addEventListener("submit", function(e){
             e.preventDefault();
@@ -82,6 +94,36 @@
                 alert("Please enter a username and password");
             }
         });
+
+        // This is thePassword reset/change functionality
+        const resetForm = document.getElementById("reset-form");
+        resetForm.addEventListener("submit", function(e){
+            e.preventDefault();
+            const resetUsername = resetForm["reset-username"].value.trim();
+            const resetPassword = resetForm["reset-password"].value;
+
+            // Check if the username exists and update the password
+            const storedUser = JSON.parse(localStorage.getItem("user"));
+            if(storedUser && storedUser.username === resetUsername){
+                storedUser.password = resetPassword;
+                localStorage.setItem("user", JSON.stringify(storedUser));
+                alert("Password successfully reset! You can now login with your new password.");
+                resetForm.reset();
+            } else {
+                alert("Username not found.");
+            }
+        });
+
+        //This toggles the visibility of the reset password form, I realize could've added this to style.css but am in a rush to submit it on time.
+        const toggleBtn = document.getElementById("toggle-reset");
+        toggleBtn.addEventListener("click", function(){
+            if(resetForm.style.display === "none"){
+                resetForm.style.display = "block";
+            } else {
+                resetForm.style.display = "none";
+            }
+        });
     </script>
 </body>
 </html>
+

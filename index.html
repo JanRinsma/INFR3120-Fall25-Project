@@ -16,7 +16,7 @@
     
     <!--This is just the intro section that's displayed on the index page.-->
     <section class="intro">
-        <img src="scheduling-logo.png">
+        <img src="scheduling-logo.png" id="profile-pic" style="width:100px;height:100px;border-radius:50%;">
         <h1>STUDENT SCHEDULING SYSTEM</h1>
         <p>
             This site contains the initial version of our scheduling system project. Many things may not be as good
@@ -25,6 +25,12 @@
             efficient or clean without altering the appearance/functionality of the site) will follow in future releases
             of this site.
         </p>
+
+        <!--Profile Picture Upload Section-->
+        <div id="profile-upload">
+            <label for="profile-image">Change Profile Picture:</label>
+            <input type="file" id="profile-image" accept="image/*">
+        </div>
     </section>
 
     <!--This is to create the "create schedule" button. -->
@@ -32,8 +38,6 @@
         <button type="button" name="entry-form">Click here to create schedule</button>
     </section>
     
-
-    <!--This section is for the schedule entry form, it also makes the event name mandatory as without an event name the date is meaningless. It also defines the type of inputs, will try playing around with the calendar entry in part 3.-->
     <table>
         <tr>
             <td>
@@ -77,7 +81,6 @@
     <!--This is very importnat it runs our script file.-->
     <script src="script.js"></script>
     <script>
-        
         //This redirects them to the login page if they're not logged in.
         if (!localStorage.getItem("loggedIn")) {
             window.location.href = "login.html";
@@ -93,6 +96,31 @@
         logoutNav.addEventListener("click", () => {
             localStorage.removeItem("loggedIn");
             window.location.href = "login.html";
+        });
+
+        //This is for the profile picture upload
+        const profileInput = document.getElementById("profile-image");
+        const profilePic = document.getElementById("profile-pic");
+
+        // This loads the stored profile picture if it's available
+        const storedImage = localStorage.getItem("profileImage");
+        if(storedImage){
+            profilePic.src = storedImage;
+        }
+
+        // This is what's used for when the usr chooses a new image!
+        profileInput.addEventListener("change", function() {
+            const file = this.files[0];
+            if(file){
+                const reader = new FileReader();
+                reader.onload = function(e){
+                    // Display the image
+                    profilePic.src = e.target.result;
+                    // Store the image in localStorage
+                    localStorage.setItem("profileImage", e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
